@@ -1,6 +1,9 @@
 package com.anhembi.demo.model;
 
-public class TransactionList<T> {
+import java.util.ArrayList;
+import java.util.List;
+
+public class TransactionList {
     Node<Transacao> first, last;
     private int size;
 
@@ -27,7 +30,7 @@ public class TransactionList<T> {
     }
 
     public Transacao removeFirst() {
-        // 1. lista vazia
+
         if (isEmpty()) {
             return null;
         }
@@ -35,11 +38,9 @@ public class TransactionList<T> {
         Transacao data = first.getData();
         first = first.getNext();
 
-        // 2. só tem um nó
         if (first == null) {
             last = null;
         } else {
-            // 3. caso geral
             first.setPrev(null);
         }
 
@@ -64,20 +65,20 @@ public class TransactionList<T> {
         size--;
         return data;
     }
-    @Override
-    public String toString() {
+
+    public List<Transacao> print() {
         if (isEmpty()) {
-            return "Lista Vazia";
+            return null;
         }
 
-        String dataString = first.getData().toString();
         Node<Transacao> aux = first.getNext();
+        List<Transacao> lista = new ArrayList<>();
 
         while (aux != null) {
-            dataString += "-" + aux.getData();
+            lista.add(aux.getData());
             aux = aux.getNext();
         }
-        return dataString;
+        return lista;
     }
 
     public Transacao get(int position) {
