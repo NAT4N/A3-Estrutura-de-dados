@@ -19,12 +19,12 @@ public class TransacaoService {
     Random random = new Random();
 
 
-    public ResponseEntity<List<Transacao>> populateList(int quantity) {
+    public List<Transacao> populateList(int quantity) {
         for (int i = 0; i < quantity; i++) {
             addTransaction(new TransacaoDTO(String.format("%.2f", random.nextDouble(0, 1000)), "Categoria", "Tipo").parseToTransacao());
         }
 
-        return ResponseEntity.ok().body(lista.print());
+        return lista.print();
     }
     public Transacao newTransaction(Transacao transaction)
     {
