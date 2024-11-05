@@ -1,9 +1,12 @@
-package com.anhembi.demo.model;
+package com.anhembi.demo.service;
 
-import com.anhembi.demo.exception.FilaVaziaException;
+import com.anhembi.demo.Repositories.TransacaoRepository;
 import com.anhembi.demo.exception.PilhaVaziaException;
+import com.anhembi.demo.model.Pilha;
+import com.anhembi.demo.model.Transacao;
+import com.anhembi.demo.model.TransactionList;
 import com.anhembi.demo.model.dto.TransacaoDTO;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +19,15 @@ public class TransacaoService {
 
     public static final TransactionList lista = new TransactionList();
     public static final Pilha pilha = new Pilha();
+
+    @Autowired
+    public TransacaoRepository repository;
     Random random = new Random();
 
 
     public List<Transacao> populateList(int quantity) {
         for (int i = 0; i < quantity; i++) {
-            addTransaction(new TransacaoDTO(String.format("%.2f", random.nextDouble(0, 1000)), "Categoria", "Tipo").parseToTransacao());
+            addTransaction(new TransacaoDTO(String.format("%.2f", random.nextDouble()), "Categoria", "Tipo").parseToTransacao());
         }
 
         return lista.print();
@@ -51,6 +57,7 @@ public class TransacaoService {
         }
 
         addTransacaoPilha(transacao);
+        repository.save(transacao);
         System.out.println("Transacao Processada: " + transacao);
         return transacao;
     }

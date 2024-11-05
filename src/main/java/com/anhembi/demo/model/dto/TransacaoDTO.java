@@ -18,7 +18,7 @@ public class TransacaoDTO {
     public Transacao parseToTransacao(){
         Random random = new Random();
 
-        return new Transacao(random.nextLong(1, 99999999999L), valor,
+        return new Transacao(valor,
                 categoria, tipo);
     }
 }

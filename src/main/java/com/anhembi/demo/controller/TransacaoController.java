@@ -1,7 +1,7 @@
 package com.anhembi.demo.controller;
 
 import com.anhembi.demo.model.Transacao;
-import com.anhembi.demo.model.TransacaoService;
+import com.anhembi.demo.service.TransacaoService;
 import com.anhembi.demo.model.dto.TransacaoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
