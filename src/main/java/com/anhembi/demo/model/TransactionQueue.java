@@ -3,8 +3,8 @@ package com.anhembi.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionList {
-    Node<Transacao> first, last;
+public class TransactionQueue {
+    Node<Transaction> first, last;
     private int size;
 
     public boolean isEmpty() {
@@ -15,8 +15,8 @@ public class TransactionList {
         return size;
     }
 
-    public void insert(Transacao data) {
-        Node<Transacao> newNode = new Node<>(data);
+    public void insert(Transaction data) {
+        Node<Transaction> newNode = new Node<>(data);
         size++;
 
         if (isEmpty()) {
@@ -29,13 +29,13 @@ public class TransactionList {
         last = newNode;
     }
 
-    public Transacao removeFirst() {
+    public Transaction removeFirst() {
 
         if (isEmpty()) {
             return null;
         }
 
-        Transacao data = first.getData();
+        Transaction data = first.getData();
         first = first.getNext();
 
         if (first == null) {
@@ -48,12 +48,12 @@ public class TransactionList {
         return data;
     }
 
-    public Transacao removeLast() {
+    public Transaction removeLast() {
         if (isEmpty()) {
             return null;
         }
 
-        Transacao data = last.getData();
+        Transaction data = last.getData();
 
         last = last.getPrev();
         if (last == null) {
@@ -66,27 +66,27 @@ public class TransactionList {
         return data;
     }
 
-    public List<Transacao> print() {
+    public List<Transaction> print() {
         if (isEmpty()) {
             return null;
         }
 
-        Node<Transacao> aux = first.getNext();
-        List<Transacao> lista = new ArrayList<>();
+        Node<Transaction> aux = first.getNext();
+        List<Transaction> queue = new ArrayList<>();
 
         while (aux != null) {
-            lista.add(aux.getData());
+            queue.add(aux.getData());
             aux = aux.getNext();
         }
-        return lista;
+        return queue;
     }
 
-    public Transacao get(int position) {
+    public Transaction get(int position) {
         if(position <= 0 || position > size){
             return null;
         }
         int count = 1;
-        Node<Transacao> aux = first;
+        Node<Transaction> aux = first;
         while (count < position) {
             aux = aux.getNext();
             count++;

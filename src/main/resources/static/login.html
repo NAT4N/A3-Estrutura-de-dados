@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="navegador" content="width=device-width, initial-scale=1.0">
+    <title>RogerinhoBoasVendendas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>RogerinhoBoasVendendas</h1>
+    <div class="Buscar-bar">
+        <input type="text" placeholder="Buscar Produtos...">
+        <button onclick="BuscarProdutos()">Buscar</button>
+    </div>
+    <button class="login-button" onclick="window.location.href='login.html'">Login</button>
+    <button class="carrinho" onclick="window.location.href='carrinho.html'">Carrinho</button>
+</header>
+
+<div class="login-register">
+    <div class="form-container">
+        <h2>Login</h2>
+        <input type="text" placeholder="Email" required>
+        <input type="password" placeholder="Senha" required>
+        <button onclick="login()">Entrar</button>
+        <button onclick="forgotPassword()">Esqueci minha senha</button> <!-- Novo botão adicionado -->
+        <h3>Ou</h3>
+        <h2>Registrar</h2>
+        <input type="text" placeholder="Nome" required>
+        <input type="text" placeholder="Email" required>
+        <input type="password" placeholder="Senha" required>
+        <button onclick="register()">Registrar</button>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; RogerinhoBoasVendendas.</p>
+</footer>
+<script>
+    function BuscarProdutos() {
+        const query = document.querySelector('.Buscar-bar input').value;
+        alert('Buscaring for: ' + query);
+    }
+
+    function addToCart(ProdutoName) {
+        alert(ProdutoName + ' has been added to your cart!');
+    }
+</script>
+
+</body>
+</html>

@@ -5,11 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Pilha {
-    private Node<Transacao> top;
+public class TransactionStack {
+    private Node<Transaction> top;
 
-    public void push(Transacao data) {
-        Node<Transacao> newNode = new Node<>(data);
+    public void push(Transaction data) {
+        Node<Transaction> newNode = new Node<>(data);
         if (top != null) {
             newNode.setNext(top);
             top.setPrev(newNode);
@@ -17,11 +17,11 @@ public class Pilha {
         top = newNode;
     }
 
-    public Transacao pop() {
+    public Transaction pop() {
         if (top == null) {
             return null;
         }
-        Transacao data = top.getData();
+        Transaction data = top.getData();
         top = top.getNext();
         if (top != null) {
             top.setPrev(null);
@@ -29,7 +29,7 @@ public class Pilha {
         return data;
     }
 
-    public Transacao top() {
+    public Transaction top() {
         if (top == null) {
             return null;
         }
@@ -42,7 +42,7 @@ public class Pilha {
 
     public int size() {
         int count = 0;
-        Node<Transacao> current = top;
+        Node<Transaction> current = top;
         while (current != null) {
             count++;
             current = current.getNext();
@@ -53,12 +53,17 @@ public class Pilha {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        Node<Transacao> current = top;
+        Node<Transaction> current = top;
+        sb.append("[\n");
+
         while (current != null) {
-            sb.append(current.toString());
-            sb.append("\n");
+            sb.append(current);
+            if (current.getNext() != null)
+                sb.append(",\n");
             current = current.getNext();
         }
+
+        sb.append("]\n");
         return sb.toString();
     }
 

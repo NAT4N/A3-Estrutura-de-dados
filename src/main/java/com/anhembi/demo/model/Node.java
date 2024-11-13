@@ -5,14 +5,14 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Node<T> {
-    private Transacao data;
-    private Node<Transacao> next, prev;
+    private Transaction data;
+    private Node<Transaction> next, prev;
 
-    public Node(Transacao data) {
+    public Node(Transaction data) {
         this.data = data;
     }
 
-    public Node(Transacao data, Node<Transacao> next, Node<Transacao> prev) {
+    public Node(Transaction data, Node<Transaction> next, Node<Transaction> prev) {
         this.data = data;
         this.next = next;
         this.prev = prev;
