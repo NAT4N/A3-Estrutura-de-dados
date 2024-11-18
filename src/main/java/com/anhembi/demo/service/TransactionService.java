@@ -59,9 +59,9 @@ public class TransactionService {
         try {
             final TransactionStack pilha = new TransactionStack();
 
-            List<Transaction> trasacoes = repository.findAllByIdCliente("ASJHDBA-897IKJHBK-AHSBD787");
+            List<Transaction> transacoes = repository.findAllByIdCliente("ASJHDBA-897IKJHBK-AHSBD787");
 
-            trasacoes.forEach(t -> {
+            transacoes.forEach(t -> {
                 try {
                     pilha.push(new TransactionDTO(t.getIdTransacao(), t.getDataTransacao(), t.getIdCliente(), t.getValor(), List.of(
                             mapper.readValue(t.getProdutos(), Product[].class)),
