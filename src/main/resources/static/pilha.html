@@ -1,140 +1,183 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórico de Pedidos</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <!-- Header -->
-<header>
-   	 <h1>RogerinhoBoasVendendas</h1>
-    	 <div class="header-buttons">
-        	<button class="carrinho" onclick="window.location.href='index.html'">Início</button>
-        	<button class="login-button" onclick="window.location.href='carrinho.html'">Carrinho</button>
-    </div>
-</header>
+    <header>
+        <h1>RogerinhoBoasVendendas</h1>
+        <div class="header-buttons">
+            <button class="carrinho" onclick="window.location.href='index.html'">Início</button>
+            <button class="login-button" onclick="window.location.href='carrinho.html'">Carrinho</button>
+        </div>
+    </header>
 
-     <!-- Seção de Pedidos -->
+    <!-- Seção de Pedidos -->
     <div class="container">
         <h2>Meus Pedidos</h2>
-
-        <!-- Pedido 1 -->
-        <div class="order">
-            <div class="order-header">
-                <span>Pedido #12345</span>
-                <span class="order-date">Data: 20/11/2024</span>
-                <div class="order-total">
-                    <span>Total</span>
-                    <span class="order-value">R$ 250,00</span>
-                </div>
-            </div>
-            <button class="button2" onclick="toggleDetails(1)">Mais detalhes</button>
-            <div class="order-details" id="order-details-1">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Produto</th>
-                            <th>Quantidade</th>
-                            <th>Preço</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Produto A</td>
-                            <td>2</td>
-                            <td>R$ 50,00</td>
-                        </tr>
-                        <tr>
-                            <td>Produto B</td>
-                            <td>1</td>
-                            <td>R$ 150,00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Pedido 2 -->
-        <div class="order">
-            <div class="order-header">
-                <span>Pedido #12346</span>
-                <span class="order-date">Data: 18/11/2024</span>
-                <div class="order-total">
-                    <span>Total</span>
-                    <span class="order-value">R$ 130,00</span>
-                </div>
-            </div>
-            <button class="button2" onclick="toggleDetails(2)">Mais detalhes</button>
-            <div class="order-details" id="order-details-2">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Produto</th>
-                            <th>Quantidade</th>
-                            <th>Preço</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Produto C</td>
-                            <td>1</td>
-                            <td>R$ 130,00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Pedido 3 -->
-        <div class="order">
-            <div class="order-header">
-                <span>Pedido #12347</span>
-                <span class="order-date">Data: 15/11/2024</span>
-                <div class="order-total">
-                    <span>Total</span>
-                    <span class="order-value">R$ 190,00</span>
-                </div>
-            </div>
-            <button class="button2" onclick="toggleDetails(3)">Mais detalhes</button>
-            <div class="order-details" id="order-details-3">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Produto</th>
-                            <th>Quantidade</th>
-                            <th>Preço</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Produto D</td>
-                            <td>3</td>
-                            <td>R$ 190,00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </div>
+        <table id="dataTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Data e Hora</th>
+                <th>Valor</th>
+                <th>Forma de Pagamento</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
 
     <!-- Footer -->
     <footer>
         <p>&copy; RogerinhoBoasVendendas.</p>
     </footer>
-
-    <!-- Script para exibir/ocultar detalhes dos pedidos -->
-    <script>
-        function toggleDetails(orderId) {
-            var details = document.getElementById("order-details-" + orderId);
-            if (details.style.display === "block") {
-                details.style.display = "none";
-            } else {
-                details.style.display = "block";
-            }
-        }
-    </script>
+ 
 </body>
+
 </html>
+
+<script>
+    function toggleDetails(orderId) {
+        var details = document.getElementById("order-details-" + orderId);
+        if (details.style.display === "block") {
+            details.style.display = "none";
+        } else {
+            details.style.display = "block";
+        }
+    }
+
+    async function fetchData() {
+        try {
+            // Verifique o endpoint completo se necessário
+            const response = await fetch("v1/transacao/consolidar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                cache: "no-store"
+            });
+
+            // Verifica o status da resposta e exibe erro, se houver
+            if (!response.ok) {
+                console.error("Erro na requisição:", response.status, response.statusText);
+                return;
+            }
+
+            // Log dos dados recebidos para análise
+            const data = await response.json();
+            console.log("Dados recebidos da API:", data); // Confirma os dados recebidos
+            renderTable(data);
+        } catch (error) {
+            console.error('Erro ao buscar dados:', error);
+        }
+    }
+
+
+    function renderTable(data) {
+        const tableBody = document.querySelector("#dataTable tbody");
+        tableBody.innerHTML = ''; // Limpa a tabela antes de renderizar novos dados
+
+        if (!Array.isArray(data) || data.length === 0) {
+            console.log("Nenhum dado encontrado.");
+            tableBody.innerHTML = '<tr><td colspan="5">Nenhum dado encontrado.</td></tr>';
+            return;
+        }
+
+        data.forEach(item => {
+            const row = document.createElement("tr");
+
+            // Exibe informações básicas
+            const idCell = document.createElement("td");
+            idCell.textContent = item.idTransacao || 'N/A';
+            row.appendChild(idCell);
+
+            const dateTimeCell = document.createElement("td");
+            dateTimeCell.textContent = item.dataTransacao || 'N/A';
+            row.appendChild(dateTimeCell);
+
+            const valueCell = document.createElement("td");
+            valueCell.textContent = "R$ " + (item.valor ? item.valor : '0.00');
+            row.appendChild(valueCell);
+
+            const tipoCell = document.createElement("td");
+            tipoCell.textContent = item.tipo || 'N/A';
+            row.appendChild(tipoCell);
+
+            const actionCell = document.createElement("td");
+            const arrowIcon = document.createElement("span");
+            arrowIcon.textContent = "▷";
+            arrowIcon.classList.add("arrow");
+            arrowIcon.addEventListener("click", () => toggleInfo(row, arrowIcon, item.produtos));
+            actionCell.appendChild(arrowIcon);
+            row.appendChild(actionCell);
+
+            tableBody.appendChild(row);
+
+            // Linha adicional para os detalhes dos produtos
+            const extraRow = document.createElement("tr");
+            extraRow.classList.add("extra-info");
+
+            const extraCell = document.createElement("td");
+            extraCell.colSpan = 5;
+
+            const subTable = document.createElement("table");
+            subTable.classList.add("sub-table");
+
+            const subTableHead = document.createElement("thead");
+            const subTableHeadRow = document.createElement("tr");
+            ["Produto", "Quantidade", "Preço"].forEach(text => {
+                const th = document.createElement("th");
+                th.textContent = text;
+                subTableHeadRow.appendChild(th);
+            });
+            subTableHead.appendChild(subTableHeadRow);
+            subTable.appendChild(subTableHead);
+
+            const subTableBody = document.createElement("tbody");
+            if (Array.isArray(item.produtos)) {
+                item.produtos.forEach(produto => {
+                    const subRow = document.createElement("tr");
+
+                    const nameCell = document.createElement("td");
+                    nameCell.textContent = produto.name || 'N/A';
+                    subRow.appendChild(nameCell);
+
+                    const quantityCell = document.createElement("td");
+                    quantityCell.textContent = produto.quantity || '0';
+                    subRow.appendChild(quantityCell);
+
+                    const priceCell = document.createElement("td");
+                    priceCell.textContent = "R$ " + (produto.price ? produto.price.toFixed(2) : '0.00');
+                    subRow.appendChild(priceCell);
+
+                    subTableBody.appendChild(subRow);
+                });
+            }
+            subTable.appendChild(subTableBody);
+            extraCell.appendChild(subTable);
+            extraRow.appendChild(extraCell);
+
+            tableBody.appendChild(extraRow);
+        });
+    }
+
+
+    function toggleInfo(row, arrowIcon) {
+        const extraRow = row.nextSibling;
+        const isExpanded = extraRow.style.display === "table-row";
+
+        arrowIcon.classList.toggle("expanded", !isExpanded);
+        extraRow.style.display = isExpanded ? "none" : "table-row";
+    }
+
+    fetchData();
+
+</script>

@@ -4,6 +4,7 @@ body {
   padding: 0;
   background-color: #f5f5f5;
 }
+
 header {
   background-color: #232F3E;
   color: white;
@@ -12,9 +13,23 @@ header {
   justify-content: space-between;
   align-items: center;
 }
+
 header h1 {
   margin: 0;
   font-size: 24px;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 10px; /* Espaço entre os botões */
+}
+
+header button {
+  background-color: #febd69;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 .Buscar-bar {
   display: flex;
@@ -34,12 +49,15 @@ header h1 {
   border-radius: 4px;
   cursor: pointer;
 }
+
+
 .Produtos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
   padding: 20px;
 }
+
 .Produto {
   background-color: white;
   border: 1px solid #ddd;
@@ -47,10 +65,12 @@ header h1 {
   padding: 10px;
   text-align: center;
 }
+
 .Produto img {
   max-width: 100%;
   height: auto;
 }
+
 footer {
   background-color: #232F3E;
   color: white;
@@ -60,11 +80,13 @@ footer {
   bottom: 0;
   width: 100%;
 }
+
 .login-register {
   display: flex;
   justify-content: center;
   margin: 20px;
 }
+
 .form-container {
   background-color: white;
   border: 1px solid #ddd;
@@ -72,6 +94,7 @@ footer {
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .form-container input {
   width: 100%;
   padding: 10px;
@@ -79,6 +102,7 @@ footer {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
 .form-container button {
   width: 100%;
   padding: 10px;
@@ -87,6 +111,7 @@ footer {
   border-radius: 4px;
   cursor: pointer;
 }
+
 .container {
   max-width: 800px;
   margin: auto;
@@ -95,28 +120,34 @@ footer {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-h1{
+
+h1 {
   text-align: center;
 }
+
 .product {
   display: flex;
   justify-content: space-between;
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
+
 .product img {
   width: 50px;
   height: 50px;
 }
+
 .total {
   font-size: 1.2em;
   margin-top: 20px;
   text-align: right;
 }
+
 .buttons {
   text-align: center;
   margin-top: 20px;
 }
+
 .buttons a {
   text-decoration: none;
   padding: 10px 20px;
@@ -125,9 +156,11 @@ h1{
   border-radius: 5px;
   margin: 5px;
 }
+
 .buttons a:hover {
   background-color: #005bb5;
 }
+
 .container {
   max-width: 600px;
   margin: auto;
@@ -136,16 +169,20 @@ h1{
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 h1 {
   text-align: center;
 }
+
 .form-group {
   margin-bottom: 15px;
 }
+
 label {
   display: block;
   margin-bottom: 5px;
 }
+
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -156,6 +193,7 @@ select {
   border: 1px solid #ddd;
   border-radius: 4px;
 }
+
 .button {
   background-color: #0073e6;
   color: white;
@@ -165,33 +203,72 @@ select {
   cursor: pointer;
   width: 100%;
 }
+
 .button:hover {
   background-color: #005bb5;
 }
-.cart-item {
-  display: flex; /* Usar flexbox para alinhar os itens */
-  justify-content: space-between; /* Espaço entre o texto e o botão */
-  align-items: center; /* Alinha verticalmente os itens */
-  margin: 5px 0; /* Espaçamento entre os itens */
+
+/* Estilo dos pedidos */
+.order {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 8px;
 }
 
-/* Estilo para o botão de remover */
-.remove-button {
-  background-color: red; /* Cor de fundo vermelha */
-  color: white; /* Cor do texto branca */
-  border: none; /* Remove a borda padrão */
-  padding: 5px 10px; /* Adiciona um pouco de preenchimento */
-  cursor: pointer; /* Muda o cursor para indicar que é clicável */
-  margin-left: 10px; /* Espaço entre o texto e o botão */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
-.remove-button:hover {
-  background-color: darkred; /* Cor de fundo mais escura ao passar o mouse */
-}
-.price {
-  text-align: center; /* Centraliza o texto dos preços */
+.order-header span {
+  font-weight: bold;
 }
 
-.total-price {
-  text-align: center; /* Centraliza o total */
+.order-value {
+  color: #2a9d8f;
+}
+
+.order-details {
+  display: none;
+  margin-top: 15px;
+}
+
+.order-details table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.order-details th,
+.order-details td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.order-details th {
+  background-color: #f4f4f4;
+}
+
+.order-footer {
+  margin-top: 15px;
+  text-align: right;
+}
+
+/* Botão para mostrar detalhes */
+button2 {
+  background-color: #2a9d8f;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button2:hover {
+  background-color: #21867a;
 }

@@ -139,3 +139,5 @@ document.addEventListener('DOMContentLoaded', () => {
         totalPriceDisplay.textContent = `R$${totalPrice}`; // Atualiza o conteúdo do elemento
     }
 });
+
+
