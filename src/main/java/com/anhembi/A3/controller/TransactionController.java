@@ -14,22 +14,26 @@ public class TransactionController {
     @Autowired
     private TransactionService transacaoService;
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/transacao/populate")
     public ResponseEntity transacao(@RequestParam int quantity) {
         return ResponseEntity.ok(transacaoService.populateList(quantity));
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/transacao/new")
     public ResponseEntity newTransaction(@RequestBody TransactionDTO transacao) {
         System.out.println(transacao);
         return ResponseEntity.ok(transacaoService.newTransaction(transacao.parseToTransaction()));
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/transacao/remove")
     public ResponseEntity removeTransacao() {
         return ResponseEntity.ok(transacaoService.removeTransacao());
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/transacao/consolidar")
     public ResponseEntity<Object> consolidarTransacoes() {
         return ResponseEntity.ok(transacaoService.consolidarTransacao());

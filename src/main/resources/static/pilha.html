@@ -57,7 +57,7 @@
     async function fetchData() {
         try {
             // Verifique o endpoint completo se necessário
-            const response = await fetch("v1/transacao/consolidar", {
+            const response = await fetch("http://a3-estrutura-de-dados-production.up.railway.app/v1/transacao/consolidar", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
