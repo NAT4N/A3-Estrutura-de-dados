@@ -168,3 +168,30 @@ select {
 .button:hover {
   background-color: #005bb5;
 }
+.cart-item {
+  display: flex; /* Usar flexbox para alinhar os itens */
+  justify-content: space-between; /* Espaço entre o texto e o botão */
+  align-items: center; /* Alinha verticalmente os itens */
+  margin: 5px 0; /* Espaçamento entre os itens */
+}
+
+/* Estilo para o botão de remover */
+.remove-button {
+  background-color: red; /* Cor de fundo vermelha */
+  color: white; /* Cor do texto branca */
+  border: none; /* Remove a borda padrão */
+  padding: 5px 10px; /* Adiciona um pouco de preenchimento */
+  cursor: pointer; /* Muda o cursor para indicar que é clicável */
+  margin-left: 10px; /* Espaço entre o texto e o botão */
+}
+
+.remove-button:hover {
+  background-color: darkred; /* Cor de fundo mais escura ao passar o mouse */
+}
+.price {
+  text-align: center; /* Centraliza o texto dos preços */
+}
+
+.total-price {
+  text-align: center; /* Centraliza o total */
+}

@@ -21,15 +21,15 @@
 <div class="login-register">
     <div class="form-container">
         <h2>Login</h2>
-        <input id="login-email" type="text" placeholder="Email" required>
-        <input id="login-password" type="password" placeholder="Senha" required>
+        <input type="text" placeholder="Email" required>
+        <input type="password" placeholder="Senha" required>
         <button onclick="login()">Entrar</button>
-        <button onclick="forgotPassword()">Esqueci minha senha</button>
+        <button onclick="forgotPassword()">Esqueci minha senha</button> <!-- Novo botão adicionado -->
         <h3>Ou</h3>
         <h2>Registrar</h2>
-        <input id="register-name" type="text" placeholder="Nome" required>
-        <input id="register-email" type="text" placeholder="Email" required>
-        <input id="register-password" type="password" placeholder="Senha" required>
+        <input type="text" placeholder="Nome" required>
+        <input type="text" placeholder="Email" required>
+        <input type="password" placeholder="Senha" required>
         <button onclick="register()">Registrar</button>
     </div>
 </div>
@@ -37,94 +37,6 @@
 <footer>
     <p>&copy; RogerinhoBoasVendendas.</p>
 </footer>
-
-<script>
-    // Função para buscar produtos
-    function BuscarProdutos() {
-        const query = document.querySelector('.Buscar-bar input').value;
-        alert('Buscando por: ' + query);
-    }
-
-    // Função de Login
-    async function login() {
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-
-        // Verificar se os campos não estão vazios
-        if (!email || !password) {
-            alert("Por favor, preencha todos os campos.");
-            return;
-        }
-
-        const payload = { email, password };
-
-        try {
-            const response = await fetch('http://localhost:8080/v1/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
-            console.log(response);
-            const data = await response.json();
-
-            if (response.ok) {
-                alert('Login bem-sucedido! Bem-vindo(a) ' + data.nome);
-                // Aqui, você pode redirecionar para uma página de usuário logado ou dashboard
-            } else {
-                alert("E-mail ou senha incorretos.");
-            }
-        } catch (error) {
-            console.error("Erro na requisição:", error);
-            alert("Erro na conexão com o servidor.");
-        }
-    }
-
-    // Função de Registro
-    async function register() {
-        const name = document.getElementById('register-name').value;
-        const email = document.getElementById('register-email').value;
-        const password = document.getElementById('register-password').value;
-
-        // Verificar se os campos não estão vazios
-        if (!name || !email || !password) {
-            alert("Por favor, preencha todos os campos.");
-            return;
-        }
-
-        const payload = { name, email, password };
-
-        try {
-            const response = await fetch('http://localhost:8080/v1/cadastro', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
-
-            const data = await response;
-
-            if (response.ok) {
-                alert('Cadastro bem-sucedido! Você pode fazer login agora.');
-                // Redirecionar para página de login ou já fazer login automaticamente
-                window.location.href = 'login.html';
-            } else {
-                alert('Erro no cadastro: ' + data.message);
-            }
-        } catch (error) {
-            console.error("Erro na requisição:", error);
-            alert("Erro na conexão com o servidor.");
-        }
-    }
-
-    // Função para "Esqueci minha senha"
-    function forgotPassword() {
-        alert('Redirecionando para recuperação de senha...');
-        // Aqui você pode implementar a lógica de recuperação de senha
-    }
-</script>
 
 </body>
 </html>

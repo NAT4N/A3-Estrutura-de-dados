@@ -7,21 +7,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
 <div class="container">
     <h1>Finalizar Compra</h1>
     
-    <form>
+    <form action="javascript:finalizarCompra()">
         <div class="form-group">
             <label for="name">Nome Completo</label>
             <input type="text" id="name" name="name" required>
         </div>
-
-        <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-
         <div class="form-group">
             <label for="phone">Telefone</label>
             <input type="tel" id="phone" name="phone" required>
@@ -57,30 +50,37 @@
         <h2>Detalhes do Pagamento</h2>
 
         <div class="form-group">
+            <label for="payment-method">Forma de Pagamento</label>
+            <select id="payment-method" name="payment-method" required>
+                <option value="" disabled selected>Escolha uma forma de pagamento</option>
+                <option value="credit-card">Cartão de Crédito</option>
+                <option value="debit-card">Cartão de Débito</option>
+                <option value="pix">PIX</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
             <label for="card-name">Nome no Cartão</label>
             <input type="text" id="card-name" name="card-name" required>
         </div>
-
+        
         <div class="form-group">
             <label for="card-number">Número do Cartão</label>
             <input type="number" id="card-number" name="card-number" required>
         </div>
-
+        
         <div class="form-group">
             <label for="expiry">Data de Validade (MM/AA)</label>
             <input type="text" id="expiry" name="expiry" placeholder="MM/AA" required>
         </div>
-
+        
         <div class="form-group">
             <label for="cvv">CVV</label>
             <input type="number" id="cvv" name="cvv" required>
         </div>
-
+        <p>Total a Pagar: <span id="totalPriceDisplay">R${totalPrice}</span></p>
         <button type="submit" class="button">Finalizar Compra</button>
     </form>
 </div>
-<!-- {
-    "valor": 50000,
-    "idCliente": "SADSAD123-3123KNFSD-312SAC3",
-    "tipo": "PIX"
-} -->
+<script src="script.js" defer></script>
+</body>
