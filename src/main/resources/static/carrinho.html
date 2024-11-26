@@ -8,6 +8,16 @@
 </head>
 <body>
 
+<header>
+    <h1 class="button" onclick="window.location.href='index.html'">RogerinhoBoasVendendas</h1>
+    <div class="Buscar-bar">
+        <input type="text" placeholder="Buscar Produtos...">
+        <button onclick="BuscarProdutos()">Buscar</button>
+    </div>
+    <button class="login-button" onclick="window.location.href='login.html'">Login</button>
+    <button class="Compras" onclick="window.location.href='pilha.html'">Histórico de compra</button>
+</header>
+
 <div class="container">
     <h1>Carrinho de Compras</h1>
     
@@ -17,10 +27,12 @@
 
     <div class="buttons">
         <a href="index.html">Continuar Comprando</a>
-        <a href="pagamento.html" id="paymentButton">Finalizar Compra</a>
+        <a href="pagamento.html">Finalizar Compra</a>
     </div>
 </div>
-
+<footer>
+    <p>&copy; RogerinhoBoasVendendas.</p>
+</footer>
 <script src="script.js"></script>
 
 </body>

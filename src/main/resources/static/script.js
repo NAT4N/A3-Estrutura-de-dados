@@ -28,19 +28,13 @@ function displayCartItems() {
   const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
   const cartList = document.getElementById('cartItems');
   const totalPriceElement = document.getElementById('totalPrice');
-  const paymentButton = document.getElementById('paymentButton');
-
-    cartList.innerHTML = '';
+  cartList.innerHTML = '';
   let total = 0;
 
   if (cartItems.length === 0) {
       cartList.innerHTML = "<li>Seu carrinho está vazio.</li>";
       totalPriceElement.textContent = '0.00';
       localStorage.setItem('totalPrice', '0.00'); // Armazena o total no localStorage
-        //desabilita o click do botao
-        paymentButton.setAttribute('onClick', 'return false');
-        paymentButton.style.backgroundColor = '#cccccc';
-
   } else {
       cartItems.forEach((item, index) => {
           const li = document.createElement('li');
@@ -77,10 +71,10 @@ function removeFromCart(index) {
   displayCartItems();
 }
 
-// Função para Finalizar a Compra
+
 async function finalizarCompra() {
-    const totalPrice = (localStorage.getItem('totalPrice'));
-    const idCliente = "ASJHDBA-897IKJHBK-AHSBD787"; // MUDAR APÒS PEDRO
+    const totalPrice = localStorage.getItem('totalPrice');
+    const idCliente = localStorage.getItem('clientId');
     const paymentMethod = document.getElementById('payment-method').value;
 
     const dadosPagamento = {
@@ -93,22 +87,19 @@ async function finalizarCompra() {
     const jsonDadosPagamento = JSON.stringify(dadosPagamento);
     console.log(jsonDadosPagamento);
     
-    const url = "/v1/transacao/new";
+    const url = "v1/transacao/nova";
 
     try {
-        const resultado = await fetch(url,{
+        const resultado = await fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(dadosPagamento)
+            body: jsonDadosPagamento
         });
 
         if (resultado.status == 200) {
           alert("Pagamento finalizado!");
-            localStorage.removeItem('totalPrice');
-            localStorage.removeItem('cart');
-            window.location.href = 'index.html';
         } else {
             console.log("Produto não encontrado");
         }
@@ -117,6 +108,11 @@ async function finalizarCompra() {
     }
 }
 
+// Funções de Manipulação de Dados da API
+async function getData() {
+    const codigo = txtInput.value;
+
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const path = window.location.pathname;
@@ -139,5 +135,3 @@ document.addEventListener('DOMContentLoaded', () => {
         totalPriceDisplay.textContent = `R$${totalPrice}`; // Atualiza o conteúdo do elemento
     }
 });
-
-

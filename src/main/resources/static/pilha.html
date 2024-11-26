@@ -4,45 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórico de Pedidos</title>
+    <title>Histórico de Pedidos - RogerinhoBoasVendendas</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <!-- Header -->
-    <header>
-        <h1>RogerinhoBoasVendendas</h1>
-        <div class="header-buttons">
-            <button class="carrinho" onclick="window.location.href='index.html'">Início</button>
-            <button class="login-button" onclick="window.location.href='carrinho.html'">Carrinho</button>
-        </div>
-    </header>
+<!-- Header -->
+<header class="header">
+    <div class="logo">
+        <h1 onclick="window.location.href='index.html'">RogerinhoBoasVendendas</h1>
+    </div>
+    <div class="header-buttons">
+        <button class="login-button" onclick="window.location.href='login.html'">Login</button>
+        <button class="carrinho" onclick="window.location.href='carrinho.html'">Carrinho</button>
+    </div>
+</header>
 
-    <!-- Seção de Pedidos -->
-    <div class="container">
-        <h2>Meus Pedidos</h2>
-        <table id="dataTable">
+<!-- Seção de Pedidos -->
+<main class="main-container">
+    <h2>Meus Pedidos</h2>
+    <div class="orders-container">
+        <table id="dataTable" class="orders-table">
             <thead>
             <tr>
-                <th>ID</th>
+                <th>Pedido#</th>
                 <th>Data e Hora</th>
                 <th>Valor</th>
                 <th>Forma de Pagamento</th>
-                <th>Ações</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
+    </div>
+</main>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; RogerinhoBoasVendendas.</p>
-    </footer>
- 
-</body>
-
-</html>
+<!-- Footer -->
+<footer class="footer">
+    <p>&copy; RogerinhoBoasVendendas. Todos os direitos reservados.</p>
+</footer>
 
 <script>
     function toggleDetails(orderId) {
@@ -56,37 +57,31 @@
 
     async function fetchData() {
         try {
-            // Verifique o endpoint completo se necessário
-            const response = await fetch("http://a3-estrutura-de-dados-production.up.railway.app/v1/transacao/consolidar", {
-                method: "POST",
+            const response = await fetch("v1/transacao/consultar?clientId=" + localStorage.getItem("clientId"), {
+                method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 cache: "no-store"
             });
 
-            // Verifica o status da resposta e exibe erro, se houver
             if (!response.ok) {
                 console.error("Erro na requisição:", response.status, response.statusText);
                 return;
             }
 
-            // Log dos dados recebidos para análise
             const data = await response.json();
-            console.log("Dados recebidos da API:", data); // Confirma os dados recebidos
             renderTable(data);
         } catch (error) {
             console.error('Erro ao buscar dados:', error);
         }
     }
 
-
     function renderTable(data) {
         const tableBody = document.querySelector("#dataTable tbody");
-        tableBody.innerHTML = ''; // Limpa a tabela antes de renderizar novos dados
+        tableBody.innerHTML = '';
 
         if (!Array.isArray(data) || data.length === 0) {
-            console.log("Nenhum dado encontrado.");
             tableBody.innerHTML = '<tr><td colspan="5">Nenhum dado encontrado.</td></tr>';
             return;
         }
@@ -94,7 +89,6 @@
         data.forEach(item => {
             const row = document.createElement("tr");
 
-            // Exibe informações básicas
             const idCell = document.createElement("td");
             idCell.textContent = item.idTransacao || 'N/A';
             row.appendChild(idCell);
@@ -112,11 +106,11 @@
             row.appendChild(tipoCell);
 
             const actionCell = document.createElement("td");
-            const arrowIcon = document.createElement("span");
-            arrowIcon.textContent = "▷";
-            arrowIcon.classList.add("arrow");
-            arrowIcon.addEventListener("click", () => toggleInfo(row, arrowIcon, item.produtos));
-            actionCell.appendChild(arrowIcon);
+            const expandButton = document.createElement("button");
+            expandButton.textContent = "Ver Detalhes";
+            expandButton.classList.add("expand-button");
+            expandButton.addEventListener("click", () => toggleInfo(row, expandButton, item.produtos));
+            actionCell.appendChild(expandButton);
             row.appendChild(actionCell);
 
             tableBody.appendChild(row);
@@ -169,15 +163,19 @@
         });
     }
 
-
-    function toggleInfo(row, arrowIcon) {
+    function toggleInfo(row, expandButton) {
         const extraRow = row.nextSibling;
         const isExpanded = extraRow.style.display === "table-row";
-
-        arrowIcon.classList.toggle("expanded", !isExpanded);
+        expandButton.classList.toggle("expanded", !isExpanded);
         extraRow.style.display = isExpanded ? "none" : "table-row";
     }
 
-    fetchData();
+    if(localStorage.getItem('clientId') === null) {
+        window.location.href = 'login.html';
+    }
 
+    fetchData();
 </script>
+</body>
+
+</html>

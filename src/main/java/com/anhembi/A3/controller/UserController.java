@@ -18,13 +18,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @CrossOrigin(origins = "*")
     @RequestMapping("/cadastro")
     public ResponseEntity cadastro(@RequestBody RegisterDTO registerDTO) {
-        userService.userRegister(registerDTO);
-        return ResponseEntity.ok().build();
+        return userService.userRegister(registerDTO);
     }
-    @CrossOrigin(origins = "*")
+
     @RequestMapping("/login")
     public ResponseEntity login(@RequestBody LoginDTO loginDTO) {
         return userService.userLogin(loginDTO);

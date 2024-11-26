@@ -5,6 +5,7 @@ import com.anhembi.A3.model.Transaction;
 import com.anhembi.A3.model.TransactionQueue;
 import com.anhembi.A3.model.TransactionStack;
 import com.anhembi.A3.model.dto.TransactionDTO;
+import com.anhembi.A3.model.dto.UserDTO;
 import com.anhembi.A3.repositories.TransacaoRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -62,11 +63,11 @@ public class TransactionService {
         return transaction;
     }
 
-    public Object consolidarTransacao() {
+    public Object consultarTransacao(String clientId) {
         try {
             final TransactionStack pilha = new TransactionStack();
 
-            List<Transaction> transacoes = repository.findAllByIdCliente("ASJHDBA-897IKJHBK-AHSBD787");
+            List<Transaction> transacoes = repository.findAllByIdCliente(clientId);
 
             transacoes.forEach(t -> {
                 try {
