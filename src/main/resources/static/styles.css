@@ -5,11 +5,11 @@ body {
   background-color: #f5f5f5;
 }
 header {
-  background-color: #232F3E;
   color: white;
-  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
+  background-color: #131921;
+  padding: 10px 20px;
   align-items: center;
 }
 header h1 {
@@ -17,20 +17,21 @@ header h1 {
   font-size: 24px;
 }
 header button {
-  padding: 10px;
-  background-color: #febd69;
+  background-color: #ff9900;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin: 5px;
-}
-.button{
   color: white;
+  padding: 8px 16px;
   cursor: pointer;
-  text-decoration: none;
+  font-size: 14px;
+  border-radius: 4px;
+  margin: 2px;
 }
-.button:hover {
+.h1_button{
+  color: #ff9900;
+  font-size: 24px;
+  cursor: pointer;
+}
+.h1_button:hover {
   background-color: #232F3E;
 }
 .Produto button {
@@ -54,11 +55,14 @@ header button {
   border-radius: 4px;
 }
 .Buscar-bar button {
-  padding: 10px;
-  background-color: #febd69;
+  background-color: #ff9900;
   border: none;
-  border-radius: 4px;
+  color: white;
+  padding: 8px 16px;
   cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+  margin: 2px;
 }
 .Produtos {
   display: grid;
@@ -79,47 +83,68 @@ header button {
   object-fit: contain;
 }
 footer {
-  background-color: #232F3E;
+  background-color: #131921;
   color: white;
   text-align: center;
-  padding: 10px;
-  position: relative;
-  bottom: 0;
   width: 100%;
+  position: fixed ; /* Muda de fixed para relative */
+  padding: 20px 0; /* Adiciona algum padding para o footer */
+  bottom: 0;
+  left: 0;
+}
+.footer2 {
+  background-color: #131921;
+  color: white;
+  text-align: center;
+  width: 100%;
+  position: relative ; /* Muda de fixed para relative */
+  padding: 20px 0; /* Adiciona algum padding para o footer */
+  bottom: 0;
+  left: 0;
 }
 .login-register {
   display: flex;
   justify-content: center;
   margin: 20px;
+  margin-top: 5%;
 }
 .form-container {
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  max-width: 600px;
+  background: white;
   padding: 20px;
+  border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 50%; /* Adjust width as needed */
+  margin: 0 auto;
+  text-align: center;
 }
 .form-container input {
-  width: 100%;
   padding: 10px;
-  margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
+  display: block;
+  width: 95%; /* Make input fields fill the width of the container */
+  margin: 10px auto; /* Adjust spacing as needed */
 }
 .form-container button {
-  width: 100%;
   padding: 10px;
-  background-color: #febd69;
+  background-color: #ff9900;
   border: none;
-  border-radius: 4px;
+  color: white;
+  padding: 8px 16px;
   cursor: pointer;
-  margin: 5px;
+  font-size: 14px;
+  border-radius: 4px;
+  display: block;
+  width: 100%; /* Make input fields fill the width of the container */
+  margin: 10px auto; /* Adjust spacing as needed */
 }
 .container {
-  max-width: 800px;
+  max-width: 600px;
   margin: auto;
   background: white;
   padding: 20px;
+  padding-bottom: 80px; /* Adiciona espaço inferior */
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -179,38 +204,37 @@ input[type="email"],
 input[type="tel"],
 input[type="number"],
 select {
-  width: 100%;
+  width: 95%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
 .cart-item {
-  display: flex; /* Usar flexbox para alinhar os itens */
-  justify-content: space-between; /* Espaço entre o texto e o botão */
-  align-items: center; /* Alinha verticalmente os itens */
-  margin: 5px 0; /* Espaçamento entre os itens */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0;
 }
 
-/* Estilo para o botão de remover */
 .remove-button {
-  background-color: red; /* Cor de fundo vermelha */
-  color: white; /* Cor do texto branca */
-  border: none; /* Remove a borda padrão */
-  padding: 5px 10px; /* Adiciona um pouco de preenchimento */
-  cursor: pointer; /* Muda o cursor para indicar que é clicável */
-  margin-left: 10px; /* Espaço entre o texto e o botão */
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 10px;
 }
 
 .remove-button:hover {
-  background-color: darkred; /* Cor de fundo mais escura ao passar o mouse */
+  background-color: darkred;
 }
 .price {
-  text-align: center; /* Centraliza o texto dos preços */
+  text-align: center;
 }
 
 .total-price {
-  text-align: center; /* Centraliza o total */
+  text-align: center;
 }
 
 /* Estilos Gerais */
@@ -229,21 +253,6 @@ h1, h2 {
 
 a {
     text-decoration: none;
-}
-
-/* Header */
-.header {
-    background-color: #131921;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header .logo h1 {
-    color: #ff9900;
-    font-size: 24px;
-    cursor: pointer;
 }
 
 .header-buttons button {
@@ -329,13 +338,16 @@ a {
     background-color: #f3f3f3;
 }
 
-/* Footer */
-.footer {
-    background-color: #131921;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+form button {
+  text-decoration: none;
+  padding: 10px 20px;
+  color: white;
+  background-color: #0073e6;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
 }
+form button:hover {
+  background-color: #1168c0;
+}
+
