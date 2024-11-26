@@ -13,13 +13,13 @@ services:
     depends_on:
       - db  
     networks:
-      - minha-rede  
+      - main  
 
   db:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: root  
-      MYSQL_DATABASE: meu_banco         
+      MYSQL_DATABASE: a3         
     ports:
       - "3306:3306"  
     volumes:
@@ -27,11 +27,11 @@ services:
       - ./init-scripts:/docker-entrypoint-initdb.d  
 
     networks:
-      - minha-rede  
+      - main  
 
 volumes:
   mysql-data:
 
 networks:
-  minha-rede:
+  main:
     driver: bridge  

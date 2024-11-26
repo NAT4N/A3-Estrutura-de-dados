@@ -45,7 +45,7 @@ public class TransactionService {
 
 
     @Scheduled(fixedRate = 1000)
-    public Transaction removeTransacao() {
+    public Transaction processarTransacao() {
         DateTimeFormatter dt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         Transaction transaction = fila.removeFirst();

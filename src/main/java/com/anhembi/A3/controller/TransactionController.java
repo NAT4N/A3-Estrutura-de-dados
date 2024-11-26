@@ -15,19 +15,19 @@ public class TransactionController {
     private TransactionService transacaoService;
 
     @PostMapping("/transacao/populate")
-    public ResponseEntity transacao(@RequestParam int quantity) {
+    public ResponseEntity<Object> transacao(@RequestParam int quantity) {
         return ResponseEntity.ok(transacaoService.populateList(quantity));
     }
 
     @PostMapping("/transacao/nova")
-    public ResponseEntity newTransaction(@RequestBody TransactionDTO transacao) {
+    public ResponseEntity<Object> newTransaction(@RequestBody TransactionDTO transacao) {
         System.out.println(transacao);
         return ResponseEntity.ok(transacaoService.newTransaction(transacao.parseToTransaction()));
     }
 
-    @PostMapping("/transacao/remove")
-    public ResponseEntity removeTransacao() {
-        return ResponseEntity.ok(transacaoService.removeTransacao());
+    @PostMapping("/transacao/processar")
+    public ResponseEntity<Object> removeTransacao() {
+        return ResponseEntity.ok(transacaoService.processarTransacao());
     }
 
     @GetMapping("/transacao/consultar")
