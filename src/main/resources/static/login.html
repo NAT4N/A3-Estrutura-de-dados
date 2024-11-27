@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="navegador" content="width=device-width, initial-scale=1.0">
-    <title>RogerinhoBoasVendendas</title>
+    <title>RogerinhoBoasVendas</title>
     <link rel="stylesheet" href="styles.css">
     <script>
         // Função para fazer o login
@@ -45,6 +45,7 @@
                     console.error('Erro ao fazer login:', error);
                     alert('Erro no servidor.');
                 });
+                checkLoginStatus(); // Atualiza a interface
         }
 
         // Função para registrar um novo usuário
@@ -90,7 +91,6 @@
                     alert('Erro no servidor.');
                 });
         }
-
         // Função para redirecionar o usuário para recuperação de senha
         function forgotPassword() {
             window.location.href = 'recuperar_senha.html'; // Redireciona para uma página de recuperação de senha
@@ -100,7 +100,7 @@
 <body>
 
 <header>
-    <h1 class="h1_button" onclick="window.location.href='index.html'">RogerinhoBoasVendendas</h1>
+    <h1 class="h1_button" onclick="window.location.href='index.html'">RogerinhoBoasVendas</h1>
     <div class="Buscar-bar">
         <input type="text" placeholder="Buscar Produtos...">
         <button onclick="BuscarProdutos()">Buscar</button>
@@ -125,7 +125,7 @@
 </div>
 
 <footer>
-    <p>&copy; RogerinhoBoasVendendas.</p>
+    <p>&copy; RogerinhoBoasVendas.</p>
 </footer>
 
 </body>
