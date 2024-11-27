@@ -5,109 +5,23 @@
     <meta name="navegador" content="width=device-width, initial-scale=1.0">
     <title>RogerinhoBoasVendas</title>
     <link rel="stylesheet" href="styles.css">
-    <script>
-        // Função para fazer o login
-        function login() {
-            // Capturando os dados de login
-            const email = document.querySelector('input[placeholder="Email"]').value;
-            const senha = document.querySelector('input[placeholder="Senha"]').value;
-
-            // Verificando se os campos foram preenchidos
-            if (!email || !senha) {
-                alert('Por favor, preencha todos os campos de login.');
-                return;
-            }
-
-            // Enviando os dados para o back-end (v1/login)
-            fetch('v1/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: senha
-                })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.id) {
-                        // Se o login for bem-sucedido, redireciona o usuário
-                        alert('Login bem-sucedido!');
-                        localStorage.setItem('clientId', data.id);
-                        window.location.href = 'index.html'; // Redireciona para uma página inicial
-                    } else {
-                        // Caso haja erro no login
-                        alert('Erro no login: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro ao fazer login:', error);
-                    alert('Erro no servidor.');
-                });
-                checkLoginStatus(); // Atualiza a interface
-        }
-
-        // Função para registrar um novo usuário
-        function register() {
-            // Capturando os dados de registro
-            const nome = document.querySelector('input[placeholder="Nome"]').value;
-            const email = document.querySelector('input[placeholder="EmailCadastro"]').value;
-            const senha = document.querySelector('input[placeholder="SenhaCadastro"]').value;
-
-            // Verificando se os campos foram preenchidos
-            if (!nome || !email || !senha) {
-                alert('Por favor, preencha todos os campos de registro.');
-                return;
-            }
-
-            // Enviando os dados para o back-end (v1/cadastro)
-            fetch('v1/cadastro', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: nome,
-                    email: email,
-                    password: senha
-                })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Se o cadastro for bem-sucedido, mostra mensagem e limpa os campos
-                        alert('Cadastro realizado com sucesso!');
-                        document.querySelector('input[placeholder="Nome"]').value = '';
-                        document.querySelector('input[placeholder="Email"]').value = '';
-                        document.querySelector('input[placeholder="Senha"]').value = '';
-                    } else {
-                        // Caso haja erro no cadastro
-                        alert('Erro no cadastro: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro ao fazer cadastro:', error);
-                    alert('Erro no servidor.');
-                });
-        }
-        // Função para redirecionar o usuário para recuperação de senha
-        function forgotPassword() {
-            window.location.href = 'recuperar_senha.html'; // Redireciona para uma página de recuperação de senha
-        }
-    </script>
+    <script src="script.js"></script>
 </head>
 <body>
 
 <header>
-    <h1 class="h1_button" onclick="window.location.href='index.html'">RogerinhoBoasVendas</h1>
+    <h1 class="h1_button" onclick="window.location.href='index.html'">RogerinhoBoasVendendas</h1>
     <div class="Buscar-bar">
         <input type="text" placeholder="Buscar Produtos...">
         <button onclick="BuscarProdutos()">Buscar</button>
     </div>
+    <button id="login-button" onclick="window.location.href='login.html'">Login</button>
+    <button id="logout-button" onclick="logout()">Logout</button>
+
     <button class="carrinho" onclick="window.location.href='carrinho.html'">Carrinho</button>
     <button class="Compras" onclick="window.location.href='pilha.html'">Histórico de compra</button>
 </header>
+
 <div class="login-register" class="container">
     <div class="form-container">
         <h2>Login</h2>
@@ -117,9 +31,9 @@
         <button onclick="forgotPassword()">Esqueci minha senha</button>
         <h3>Ou</h3>
         <h2>Registrar</h2>
-        <input type="text" placeholder="Nome" required>
-        <input type="text" placeholder="EmailCadastro" required>
-        <input type="password" placeholder="SenhaCadastro" required>
+        <input type="text" name=Nome" placeholder="Nome" required>
+        <input type="text"  placeholder="Email Cadastro" required>
+        <input type="password" placeholder="Senha Cadastro" required>
         <button onclick="register()">Registrar</button>
     </div>
 </div>

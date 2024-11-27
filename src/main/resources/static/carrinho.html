@@ -9,14 +9,18 @@
 <body>
 
 <header>
-    <h1 class="h1_button" onclick="window.location.href='index.html'">RogerinhoBoasVendas</h1>
+    <h1 class="h1_button" onclick="window.location.href='index.html'">RogerinhoBoasVendendas</h1>
     <div class="Buscar-bar">
         <input type="text" placeholder="Buscar Produtos...">
         <button onclick="BuscarProdutos()">Buscar</button>
     </div>
-    <button class="login-button" onclick="window.location.href='login.html'">Login</button>
+    <button id="login-button" onclick="window.location.href='login.html'">Login</button>
+    <button id="logout-button" onclick="logout()">Logout</button>
+
+    <button class="carrinho" onclick="window.location.href='carrinho.html'">Carrinho</button>
     <button class="Compras" onclick="window.location.href='pilha.html'">Histórico de compra</button>
 </header>
+
 
 <div class="container">
     <h1>Carrinho de Compras</h1>

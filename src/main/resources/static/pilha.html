@@ -6,19 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórico de Pedidos - RogerinhoBoasVendas</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
 </head>
 
 <body>
 <!-- Header -->
-<header class="header">
-    <div class="logo">
-        <h1 class="h1_button" onclick="window.location.href='index.html'">RogerinhoBoasVendas</h1>
+<header>
+    <h1 class="h1_button" onclick="window.location.href='index.html'">RogerinhoBoasVendendas</h1>
+    <div class="Buscar-bar">
+        <input type="text" placeholder="Buscar Produtos...">
+        <button onclick="BuscarProdutos()">Buscar</button>
     </div>
-    <div class="header-buttons">
-        <button class="login-button" onclick="window.location.href='login.html'">Login</button>
-        <button class="carrinho" onclick="window.location.href='carrinho.html'">Carrinho</button>
-    </div>
+    <button id="login-button" onclick="window.location.href='login.html'">Login</button>
+    <button id="logout-button" onclick="logout()">Logout</button>
+
+    <button class="carrinho" onclick="window.location.href='carrinho.html'">Carrinho</button>
+    <button class="Compras" onclick="window.location.href='pilha.html'">Histórico de compra</button>
 </header>
+
 
 <!-- Seção de Pedidos -->
 <main class="main-container">
@@ -46,130 +51,6 @@
 </footer>
 
 <script>
-    function toggleDetails(orderId) {
-        var details = document.getElementById("order-details-" + orderId);
-        if (details.style.display === "block") {
-            details.style.display = "none";
-        } else {
-            details.style.display = "block";
-        }
-    }
-
-    async function fetchData() {
-        try {
-            const response = await fetch("v1/transacao/consultar?clientId=" + localStorage.getItem("clientId"), {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                cache: "no-store"
-            });
-
-            if (!response.ok) {
-                console.error("Erro na requisição:", response.status, response.statusText);
-                return;
-            }
-
-            const data = await response.json();
-            renderTable(data);
-        } catch (error) {
-            console.error('Erro ao buscar dados:', error);
-        }
-    }
-
-    function renderTable(data) {
-        const tableBody = document.querySelector("#dataTable tbody");
-        tableBody.innerHTML = '';
-
-        if (!Array.isArray(data) || data.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="5">Nenhum dado encontrado.</td></tr>';
-            return;
-        }
-
-        data.forEach(item => {
-            const row = document.createElement("tr");
-
-            const idCell = document.createElement("td");
-            idCell.textContent = item.idTransacao || 'N/A';
-            row.appendChild(idCell);
-
-            const dateTimeCell = document.createElement("td");
-            dateTimeCell.textContent = item.dataTransacao || 'N/A';
-            row.appendChild(dateTimeCell);
-
-            const valueCell = document.createElement("td");
-            valueCell.textContent = "R$ " + (item.valor ? item.valor : '0.00');
-            row.appendChild(valueCell);
-
-            const tipoCell = document.createElement("td");
-            tipoCell.textContent = item.tipo || 'N/A';
-            row.appendChild(tipoCell);
-
-            const actionCell = document.createElement("td");
-            const expandButton = document.createElement("button");
-            expandButton.textContent = "Ver Detalhes";
-            expandButton.classList.add("expand-button");
-            expandButton.addEventListener("click", () => toggleInfo(row, expandButton, item.produtos));
-            actionCell.appendChild(expandButton);
-            row.appendChild(actionCell);
-
-            tableBody.appendChild(row);
-
-            // Linha adicional para os detalhes dos produtos
-            const extraRow = document.createElement("tr");
-            extraRow.classList.add("extra-info");
-
-            const extraCell = document.createElement("td");
-            extraCell.colSpan = 5;
-
-            const subTable = document.createElement("table");
-            subTable.classList.add("sub-table");
-
-            const subTableHead = document.createElement("thead");
-            const subTableHeadRow = document.createElement("tr");
-            ["Produto", "Quantidade", "Preço"].forEach(text => {
-                const th = document.createElement("th");
-                th.textContent = text;
-                subTableHeadRow.appendChild(th);
-            });
-            subTableHead.appendChild(subTableHeadRow);
-            subTable.appendChild(subTableHead);
-
-            const subTableBody = document.createElement("tbody");
-            if (Array.isArray(item.produtos)) {
-                item.produtos.forEach(produto => {
-                    const subRow = document.createElement("tr");
-
-                    const nameCell = document.createElement("td");
-                    nameCell.textContent = produto.name || 'N/A';
-                    subRow.appendChild(nameCell);
-
-                    const quantityCell = document.createElement("td");
-                    quantityCell.textContent = produto.quantity || '0';
-                    subRow.appendChild(quantityCell);
-
-                    const priceCell = document.createElement("td");
-                    priceCell.textContent = "R$ " + (produto.price ? produto.price.toFixed(2) : '0.00');
-                    subRow.appendChild(priceCell);
-
-                    subTableBody.appendChild(subRow);
-                });
-            }
-            subTable.appendChild(subTableBody);
-            extraCell.appendChild(subTable);
-            extraRow.appendChild(extraCell);
-
-            tableBody.appendChild(extraRow);
-        });
-    }
-
-    function toggleInfo(row, expandButton) {
-        const extraRow = row.nextSibling;
-        const isExpanded = extraRow.style.display === "table-row";
-        expandButton.classList.toggle("expanded", !isExpanded);
-        extraRow.style.display = isExpanded ? "none" : "table-row";
-    }
-
     if(localStorage.getItem('clientId') === null) {
         window.location.href = 'login.html';
     }
