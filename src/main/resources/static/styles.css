@@ -350,4 +350,7 @@ form button {
 form button:hover {
   background-color: #1168c0;
 }
+select#payment-method, select#state {
+  width: 99%;
+}
 
