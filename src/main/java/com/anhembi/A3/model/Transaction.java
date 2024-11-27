@@ -23,32 +23,32 @@ public class Transaction {
     private String dataTransacao;
     private String idCliente;
     private String valor;
-    private String tipo;
+    private String formaPagamento;
     @Column(columnDefinition = "JSON")
     private String produtos;
 
 
-    public Transaction(String idCliente, String produtos, String valor, String tipo) {
+    public Transaction(String idCliente, String produtos, String valor, String formaPagamento) {
         this.idTransacao = UUID.randomUUID().toString();
         this.idCliente = idCliente;
         this.valor = valor;
-        this.tipo = tipo;
+        this.formaPagamento = formaPagamento;
         this.produtos = produtos;
     }
 
-    public Transaction(String idCliente, String dataTransacao, String produtos, String valor, String tipo) {
+    public Transaction(String idCliente, String dataTransacao, String produtos, String valor, String formaPagamento) {
         this.dataTransacao = dataTransacao;
         this.idTransacao = UUID.randomUUID().toString();
         this.idCliente = idCliente;
         this.valor = valor;
-        this.tipo = tipo;
+        this.formaPagamento = formaPagamento;
         this.produtos = produtos;
     }
 
     public TransactionDTO parseToTransactionDTO() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            return new TransactionDTO(idTransacao, dataTransacao, idCliente, valor, List.of(objectMapper.readValue(produtos, Product[].class)), tipo);
+            return new TransactionDTO(idTransacao, dataTransacao, idCliente, valor, List.of(objectMapper.readValue(produtos, Product[].class)), formaPagamento);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,7 +66,7 @@ public class Transaction {
 
                 ", \"valor\":\"" + valor + "\"" +
 
-                ", \"tipo\":\"" + tipo + "\"" +
+                ", \"formaPagamento\":\"" + formaPagamento + "\"" +
 
                 ", \"produtos\":" + produtos  +
 

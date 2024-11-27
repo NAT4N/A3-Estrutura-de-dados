@@ -32,7 +32,7 @@ public class TransactionService {
 
     public List<Transaction> populateList(int quantity) {
         for (int i = 0; i < quantity; i++) {
-            fila.insert(new Transaction("ASJHDBA-897IKJHBK-AHSBD787", "[{\"name\": \"Prod1\",\"description\": \"asdasd\",\"price\": 10.22,\"quantity\": 5}]", String.format("%.2f", random.nextDouble(0, 100)), "Tipo"));
+            fila.insert(new Transaction("e6bec3a5-3fd1-4a94-9041-dba7e6c99eb6", "[{\"name\": \"Prod1\",\"price\": 10.22,\"quantity\": 5}]", String.format("%.2f", random.nextDouble(0, 100)), "PIX"));
         }
 
         return fila.print();
@@ -73,7 +73,7 @@ public class TransactionService {
                 try {
                     pilha.push(new TransactionDTO(t.getIdTransacao(), t.getDataTransacao(), t.getIdCliente(), t.getValor(), List.of(
                             mapper.readValue(t.getProdutos(), Product[].class)),
-                            t.getTipo()).parseToTransaction());
+                            t.getFormaPagamento()).parseToTransaction());
 
                 } catch (IOException e) {
                     e.printStackTrace();
