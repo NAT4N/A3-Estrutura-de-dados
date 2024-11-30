@@ -12,7 +12,7 @@ Guilherme Cabral de Moura - 125111348868
 Pedro Henrique Silva Torres Souza - 125111357179
 ## Funcionalidades
 
-- **Cadastro de produtos:** Cadastro de produtos com descrição, preço, quantidade em estoque, entre outras informações.
+- **Cadastro de usuarios:** Cadastro de usuarios para realizarem as compras e consultar seu historico de compras.
 - **Carrinho de compras:** Sistema de carrinho para os clientes realizarem suas compras, podendo adicionar e remover produtos.
 - **Histórico de compras:** Sistema para armazenar o histórico de compras de cada cliente.
 - **Fila e Pilha:** Utilização das estruturas de dados **Fila** e **Pilha** para organizar os processos dentro do sistema.
