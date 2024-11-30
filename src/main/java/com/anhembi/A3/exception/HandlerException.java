@@ -1,5 +1,6 @@
 package com.anhembi.A3.exception;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -27,5 +28,10 @@ public class HandlerException {
     @ExceptionHandler(NoResourceFoundException.class)
     public ResponseEntity noResourceFoundException(NoResourceFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    }
+
+    @ExceptionHandler(JsonProcessingException.class)
+    public ResponseEntity errorJsonProcessingException(JsonProcessingException e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse(500, "Erro ao processar JSON"));
     }
 }

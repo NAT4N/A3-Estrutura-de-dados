@@ -68,7 +68,7 @@ async function finalizarCompra() {
     const dadosPagamento = {
         valor: totalPrice,
         idCliente: idCliente,
-        tipo: paymentMethod,
+        formaPagamento: paymentMethod,
         produtos: JSON.parse(localStorage.getItem('cart'))
     };
 
@@ -88,6 +88,7 @@ async function finalizarCompra() {
 
         if (resultado.status == 200) {
           alert("Pagamento finalizado!");
+          localStorage.setItem('cart', JSON.stringify([]));
         } else {
             console.log("Produto não encontrado");
         }
@@ -103,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (path.includes('index.html')) {
     } else if (path.includes('carrinho.html')) {
         displayCartItems();
-    } else if (path.includes('pilha.html')) {
+    } else if (path.includes('historico.html')) {
         const btn = document.getElementById("btn_enviar");
         const txtInput = document.getElementById("txt_input");
         const txtOutput = document.getElementById("txt_output");
@@ -266,9 +267,9 @@ function renderTable(data) {
         valueCell.textContent = "R$ " + (item.valor ? item.valor : '0.00');
         row.appendChild(valueCell);
 
-        const tipoCell = document.createElement("td");
-        tipoCell.textContent = item.tipo || 'N/A';
-        row.appendChild(tipoCell);
+        const formaPagamentoCell = document.createElement("td");
+        formaPagamentoCell.textContent = item.formaPagamento || 'N/A';
+        row.appendChild(formaPagamentoCell);
 
         const actionCell = document.createElement("td");
         const expandButton = document.createElement("button");

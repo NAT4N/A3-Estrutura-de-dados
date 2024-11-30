@@ -18,12 +18,12 @@ public class TransactionDTO {
     private String idCliente;
     private String valor;
     private List<Product> produtos;
-    private String tipo;
+    private String formaPagamento;
 
     public Transaction parseToTransaction() {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            Transaction result = new Transaction(idCliente, dataTransacao, objectMapper.writeValueAsString(produtos), valor, tipo);
+            Transaction result = new Transaction(idCliente, dataTransacao, objectMapper.writeValueAsString(produtos), valor, formaPagamento);
             return result;
         } catch (JsonProcessingException e) {
             e.printStackTrace();

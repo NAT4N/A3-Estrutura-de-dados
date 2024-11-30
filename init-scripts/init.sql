@@ -21,7 +21,10 @@ CREATE TABLE `transaction` (
   `id_cliente` varchar(255) DEFAULT NULL,
   `id_transacao` varchar(255) DEFAULT NULL,
   `produtos` json DEFAULT NULL,
-  `tipo` varchar(255) DEFAULT NULL,
+  `forma_pagamento` varchar(255) DEFAULT NULL,
   `valor` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
+
+INSERT INTO `user` (`id`, `email`, `name`, `password`) 
+VALUES (UNHEX(REPLACE('0acde3e1-21cd-482c-8738-870779f203a5', '-', '')), 'admin', 'admin', '$2a$12$qxyxFUn1Rcl3e7/kckJ1/.ggg9w8D3R9SsPB.ELdQiRYXVjvkhp.u');

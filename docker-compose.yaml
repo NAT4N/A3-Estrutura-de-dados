@@ -1,31 +1,30 @@
 version: '3.8'
 
 services:
-  
   app:
     build: .
     ports:
-      - "3000:8080" 
+      - "3000:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/a3
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
     depends_on:
-      - db  
+      - db
+    command: ["sh", "-c", "sleep 10 && java -jar meu-projeto.jar"]
     networks:
       - main  
 
   db:
     image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: root  
-      MYSQL_DATABASE: a3         
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: a3
     ports:
-      - "3306:3306"  
+      - "3306:3306"
     volumes:
-      - mysql-data:/var/lib/mysql  
-      - ./init-scripts:/docker-entrypoint-initdb.d  
-
+      - mysql-data:/var/lib/mysql
+      - ./init-scripts:/docker-entrypoint-initdb.d
     networks:
       - main  
 
@@ -34,4 +33,4 @@ volumes:
 
 networks:
   main:
-    driver: bridge  
+    driver: bridge

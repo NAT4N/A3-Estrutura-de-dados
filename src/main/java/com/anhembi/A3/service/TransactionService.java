@@ -5,7 +5,6 @@ import com.anhembi.A3.model.Transaction;
 import com.anhembi.A3.model.TransactionQueue;
 import com.anhembi.A3.model.TransactionStack;
 import com.anhembi.A3.model.dto.TransactionDTO;
-import com.anhembi.A3.model.dto.UserDTO;
 import com.anhembi.A3.repositories.TransacaoRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,7 +31,7 @@ public class TransactionService {
 
     public List<Transaction> populateList(int quantity) {
         for (int i = 0; i < quantity; i++) {
-            fila.insert(new Transaction("e6bec3a5-3fd1-4a94-9041-dba7e6c99eb6", "[{\"name\": \"Prod1\",\"price\": 10.22,\"quantity\": 5}]", String.format("%.2f", random.nextDouble(0, 100)), "PIX"));
+            fila.insert(new Transaction("0acde3e1-21cd-482c-8738-870779f203a5", "[{\"name\": \"Prod1\",\"price\": 10.22,\"quantity\": 5}]", String.format("%.2f", random.nextDouble(0, 100)), "PIX"));
         }
 
         return fila.print();
@@ -71,19 +70,16 @@ public class TransactionService {
 
             transacoes.forEach(t -> {
                 try {
-                    pilha.push(new TransactionDTO(t.getIdTransacao(), t.getDataTransacao(), t.getIdCliente(), t.getValor(), List.of(
-                            mapper.readValue(t.getProdutos(), Product[].class)),
+                    pilha.push(new TransactionDTO(t.getIdTransacao(), t.getDataTransacao(), t.getIdCliente(), t.getValor(),
+                            List.of(mapper.readValue(t.getProdutos(), Product[].class)),
                             t.getFormaPagamento()).parseToTransaction());
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                } catch (IOException e) {}
             });
 
             return mapper.readValue(pilha.toString(), Object.class);
 
         }catch (JsonProcessingException e){
-            e.printStackTrace();
             return null;
         }
     }

@@ -45,4 +45,4 @@ Este projeto faz uso de duas estruturas de dados principais para otimizar proces
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/seu-usuario/rogerinho-boas-vendas.git
+   git clone https://github.com/NAT4N/A3-Estrutura-de-dados.git
